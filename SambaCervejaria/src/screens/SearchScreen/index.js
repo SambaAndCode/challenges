@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import {Text, View, FlatList} from 'react-native';
+import {Text, View, FlatList, StatusBar} from 'react-native';
 
 import api from '../../services/api';
 
@@ -9,7 +9,7 @@ import ProductItem from './ProductItem';
 
 import styles from './styles';
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
   const [productList, setProductList] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [beer_name, setProductName] = React.useState('');
@@ -56,6 +56,7 @@ const SearchScreen = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#ff8000" />
       <Header setProductName={setProductName} />
       <View style={styles.body}>
         {notFound ? (
@@ -66,7 +67,13 @@ const SearchScreen = () => {
             onEndReached={loadProducts}
             onEndReachedThreshold={0.2}
             keyExtractor={product => String(product.id)}
-            renderItem={({item: product}) => <ProductItem product={product} />}
+            contentContainerStyle={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            renderItem={({item: product}) => (
+              <ProductItem product={product} navigation={navigation} />
+            )}
           />
         )}
       </View>

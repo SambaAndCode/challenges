@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Image, Text} from 'react-native';
-
-import SeeMoreButton from '../SeeMoreButton';
+import {View, Image, Text, TouchableOpacity} from 'react-native';
 
 import styles from './styles';
 
-const BeerItem = ({product}) => {
+const BeerItem = ({product, navigation}) => {
+  const navigateToProduct = () => {
+    navigation.navigate('Product', {product});
+  };
   return (
     <View style={styles.itemContainer}>
       <View style={styles.imageContainer}>
@@ -16,14 +17,22 @@ const BeerItem = ({product}) => {
         />
       </View>
       <View style={styles.descriptionContainer}>
-        <Text style={[styles.textDescriptionContainer, styles.textNameStyle]}>
-          {product.name}
-        </Text>
-        <Text
-          style={[styles.textDescriptionContainer, styles.textTaglineStyle]}>
-          {product.tagline}
-        </Text>
-        <SeeMoreButton />
+        <View>
+          <Text style={[styles.textDescriptionContainer, styles.textNameStyle]}>
+            {product.name}
+          </Text>
+        </View>
+        <View>
+          <Text
+            style={[styles.textDescriptionContainer, styles.textTaglineStyle]}>
+            {product.tagline}
+          </Text>
+        </View>
+        <View>
+          <TouchableOpacity onPress={navigateToProduct}>
+            <Text style={styles.textButton}>See more</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

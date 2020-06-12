@@ -1,21 +1,27 @@
 import React from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {View, TextInput, Image} from 'react-native';
 
 import styles from './styles';
 
-const Header = ({setBeerName}) => {
+import SambaLogo from '../../../assets/SambaLogo.png';
+
+const Header = ({setProductName}) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.logoContainer}>
-        <Text style={styles.logoStyles}>Samba de la Bière</Text>
+        <Image
+          source={SambaLogo}
+          style={styles.logoStyles}
+          resizeMode="contain"
+        />
       </View>
-      <View style={styles.inputContainer}>
+      <View>
         <TextInput
           onChangeText={text => {
-            setBeerName(text);
+            setProductName(text);
           }}
           placeholder="Find your beer"
-          placeholderTextColor="#fff"
+          placeholderTextColor="#aaa"
           defaultValue={''}
           autoFocus={true}
           style={styles.searchBox}
