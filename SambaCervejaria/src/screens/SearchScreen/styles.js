@@ -2,17 +2,20 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 10,
+    flex: 4,
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
   body: {
-    flex: 8,
-    backgroundColor: '#eee',
+    flex: 3,
+    backgroundColor: '#ECECE2',
+    justifyContent: 'center',
   },
   notFoundText: {
+    alignSelf: 'center',
+    textAlign: 'center',
     fontSize: 20,
-    color: '#000',
+    color: '#777',
   },
 });
 

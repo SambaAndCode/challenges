@@ -57,7 +57,9 @@ const SearchScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#ff8000" />
-      <Header setProductName={setProductName} />
+      <View style={{flex: 1}}>
+        <Header setProductName={setProductName} />
+      </View>
       <View style={styles.body}>
         {notFound ? (
           <Text style={styles.notFoundText}>Beer not found</Text>

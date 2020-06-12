@@ -3,10 +3,9 @@ import {View, Text} from 'react-native';
 
 import styles from './styles';
 
-const Ingredients = ({ingredients, key}) => {
+const Ingredients = ({ingredients}) => {
   return (
     <View
-      key={key}
       style={{
         marginHorizontal: 10,
         flexDirection: 'row',

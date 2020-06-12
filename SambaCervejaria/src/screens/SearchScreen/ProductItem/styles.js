@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#fff',
-    marginVertical: 10,
+    marginVertical: 5,
     borderRadius: 15,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#ff8000',
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   beerImage: {
     width: 100,
-    height: 100,
+    height: 140,
   },
   descriptionContainer: {
     flex: 1,

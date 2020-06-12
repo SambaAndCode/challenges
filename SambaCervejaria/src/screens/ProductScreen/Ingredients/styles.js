@@ -2,8 +2,9 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   textIngredientsDescription: {
-    fontSize: 16,
-    color: '#666',
+    fontSize: 13,
+    color: '#333',
+    fontWeight: 'bold',
   },
 });
 export default styles;
