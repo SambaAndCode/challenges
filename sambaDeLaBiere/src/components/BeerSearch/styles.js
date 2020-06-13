@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -6,7 +6,7 @@ export default StyleSheet.create({
     top: 50,
     left: 30,
     right: 30 */
-    
+    zIndex: 1,
   },
   input: {
     marginHorizontal: 30,
@@ -14,16 +14,9 @@ export default StyleSheet.create({
     borderRadius: 20,
     paddingLeft: 10,
     height: 40,
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.46,
-    shadowRadius: 11.14,
     backgroundColor: '#eee',
-    elevation: 17,
+    elevation: 5,
+    zIndex: 1,
   },
-  icon: {
-
-  }
-})
+  icon: {},
+});

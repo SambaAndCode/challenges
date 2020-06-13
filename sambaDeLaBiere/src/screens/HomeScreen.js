@@ -8,7 +8,8 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {View, Text} from 'react-native';
 import axios from 'axios';
-
+import CartModal from '../components/CartModal';
+import FloatActionButton from '../components/FloatActionButton';
 // import Toolbar from '../components/Toolbar';
 import BeerList from '../components/BeerList';
 import BeerSearch from '../components/BeerSearch';
@@ -17,6 +18,7 @@ import resBeers from '../responde.json';
 const HomeScreen = ({navigation}) => {
   const [beers, setBeers] = useState([]);
   const [query, setQuery] = useState('');
+  const [showCart, setShowCart] = useState(false);
   const loadBeers = (query = null) => {
     axios({
       method: 'get',
@@ -57,10 +59,16 @@ const HomeScreen = ({navigation}) => {
   );
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       {/* <Toolbar /> */}
       <BeerSearch onQueryChance={onQueryChange} />
       <BeerList beers={beers} onItemSelected={onItemSelected} />
+      {showCart && <CartModal />}
+      <FloatActionButton
+        onClick={() => {
+          setShowCart(!showCart);
+        }}
+      />
     </View>
   );
 };

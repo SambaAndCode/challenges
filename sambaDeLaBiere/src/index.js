@@ -12,16 +12,43 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
 import DetailsScreen from './screens/DetailsScreen';
-
+import CartModal from './components/CartModal';
+import {CartContextProvider} from './contexts/CartContext';
+import colors from './assets/colors';
 const Stack = createStackNavigator();
 
 const App = () => {
+  const options = {
+    title: 'Samba de la Biere',
+    headerStyle: {
+      backgroundColor: colors.primary,
+    },
+    headerTintColor: '#fff',
+    /* headerRight: props => (
+      <CartModal
+        {...props}
+        onPress={() => {
+          // Do something
+        }}
+      />
+    ), */
+  };
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name={'Home'} component={HomeScreen} />
-        <Stack.Screen name={'Details'} component={DetailsScreen} />
-      </Stack.Navigator>
+      <CartContextProvider items={{}}>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name={'Home'}
+            component={HomeScreen}
+            options={options}
+          />
+          <Stack.Screen
+            name={'Details'}
+            component={DetailsScreen}
+            options={options}
+          />
+        </Stack.Navigator>
+      </CartContextProvider>
     </NavigationContainer>
   );
 };
