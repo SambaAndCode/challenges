@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import BeerDetails from '../components/BeerDetails';
 import FloatActionButton from '../components/FloatActionButton';
 import {useCartContext} from '../contexts/CartContext';
@@ -9,7 +9,9 @@ const DetailsScreen = ({route}) => {
   const {add} = useCartContext();
   return (
     <View style={{flex: 1}}>
-      <BeerDetails beer={beer} />
+      <ScrollView>
+        <BeerDetails beer={beer} />
+      </ScrollView>
       <FloatActionButton
         onClick={() => {
           add(beer);

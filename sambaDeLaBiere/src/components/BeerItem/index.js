@@ -8,8 +8,10 @@ const BeerItem = ({beer, onItemSelected}) => {
     <TouchableOpacity onPress={() => onItemSelected(beer)}>
       <View style={styles.container}>
         <Image style={styles.image} source={{uri: beer.image_url}} />
-        <Text>{beer.name}</Text>
-        <Text>{beer.tagline}</Text>
+        <View>
+          <Text style={styles.name}>{beer.name}</Text>
+          <Text style={styles.description}>{beer.tagline}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
