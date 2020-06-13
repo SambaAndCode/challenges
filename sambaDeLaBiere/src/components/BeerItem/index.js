@@ -1,15 +1,18 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 
 import styles from './styles';
 
-const BeerItem = ({beer}) => {
+const BeerItem = ({beer, onItemSelected}) => {
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={{uri: beer.image_url}}></Image>
-      <Text>{beer.name}</Text>
-    </View>
+    <TouchableOpacity onPress={() => onItemSelected(beer)}>
+      <View style={styles.container}>
+        <Image style={styles.image} source={{uri: beer.image_url}} />
+        <Text>{beer.name}</Text>
+        <Text>{beer.tagline}</Text>
+      </View>
+    </TouchableOpacity>
   );
-}
+};
 
 export default BeerItem;
