@@ -6,6 +6,7 @@ export default StyleSheet.create({
     marginVertical: 10,
   },
   description: {
+    flexShrink: 1,
     flexGrow: 1,
   },
   image: {

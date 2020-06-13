@@ -4,9 +4,10 @@ export default StyleSheet.create({
   container: {
     flexDirection: 'row',
     marginVertical: 10,
-    /* borderColor: 'black',
-    borderStyle: 'solid',
-    borderWidth: 1, */
+  },
+  infoContainer: {
+    marginRight: 10,
+    flexShrink: 1,
   },
   image: {
     height: 90,
@@ -16,6 +17,7 @@ export default StyleSheet.create({
   },
   name: {
     fontSize: 15,
+    flexGrow: 1,
   },
   description: {
     fontSize: 10,

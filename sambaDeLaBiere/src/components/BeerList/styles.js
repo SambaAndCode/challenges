@@ -6,5 +6,12 @@ export default StyleSheet.create({
     backgroundColor: '#cdcecc',
     marginHorizontal: 40,
   },
-  list: {},
+  list: {
+    marginHorizontal: 10,
+  },
+  message: {
+    fontSize: 18,
+    alignSelf: 'center',
+    marginVertical: 30,
+  },
 });

@@ -4,12 +4,14 @@ import CartItem from '../CartItem';
 import styles from './styles';
 
 const CartItemsList = ({items}) => {
-  return (
+  return items.length ? (
     <FlatList
       data={items}
       renderItem={({item}) => <CartItem item={item} />}
       keyExtractor={item => `id-${item.data.id}`}
     />
+  ) : (
+    <Text style={styles.message}>Your cart is empty.</Text>
   );
 };
 

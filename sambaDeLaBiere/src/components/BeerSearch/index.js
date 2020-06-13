@@ -9,7 +9,9 @@ const BeerSearch = ({onQueryChance}) => {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        onChangeText={text => onQueryChance(text)}
+        onChangeText={text => {
+          onQueryChance(text);
+        }}
       />
       <Icon style={styles.icon} name="search" size={20} color={colors.accent} />
     </View>

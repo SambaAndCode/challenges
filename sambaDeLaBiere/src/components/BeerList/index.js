@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, Text} from 'react-native';
 import BeerItem from '../BeerItem';
 import styles from './styles';
 
 const BeerList = ({beers, onItemSelected}) => {
-  return (
+  return beers.length ? (
     <FlatList
-      style={styles.list}
+      contentContainerStyle={styles.list}
       data={beers}
       renderItem={({item}) => (
         <BeerItem beer={item} onItemSelected={onItemSelected} />
@@ -14,6 +14,8 @@ const BeerList = ({beers, onItemSelected}) => {
       keyExtractor={item => `id-${item.id}`}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
     />
+  ) : (
+    <Text style={styles.message}>No item found!</Text>
   );
 };
 

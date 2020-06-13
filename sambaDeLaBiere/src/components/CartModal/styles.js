@@ -8,5 +8,13 @@ export default StyleSheet.create({
     bottom: 100,
     padding: 10,
     backgroundColor: '#fefefe',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });
