@@ -14,6 +14,7 @@ import FloatActionButton from '../components/FloatActionButton';
 import BeerList from '../components/BeerList';
 import BeerSearch from '../components/BeerSearch';
 import resBeers from '../responde.json';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomeScreen = ({navigation}) => {
   const [beers, setBeers] = useState([]);
@@ -68,6 +69,7 @@ const HomeScreen = ({navigation}) => {
         onClick={() => {
           setShowCart(!showCart);
         }}
+        icon={<Icon name="shopping-cart" size={30} color="#fff" />}
       />
     </View>
   );
