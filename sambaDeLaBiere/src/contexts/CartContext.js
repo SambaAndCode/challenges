@@ -1,7 +1,7 @@
 import React, {createContext, useContext} from 'react';
 const CartContext = createContext({});
 
-export const CartContextProvider = ({children, items}) => {
+export const CartContextProvider = ({children, items, setItems}) => {
   const add = item => {
     if (!items[item.name]) {
       items[item.name] = {
@@ -11,17 +11,14 @@ export const CartContextProvider = ({children, items}) => {
     }
     items[item.name].count += 1;
     items[item.name].data = item;
+    setItems({...items});
   };
 
   const remove = item => {
-    if (!items[item.name]) {
-      items[item.name] = {
-        count: 0,
-        data: {},
-      };
+    if (items[item.name]) {
+      delete items[item.name];
+      setItems({...items});
     }
-    items[item.name].count -= 1;
-    items[item.name].data = item;
   };
 
   const listAll = () => {

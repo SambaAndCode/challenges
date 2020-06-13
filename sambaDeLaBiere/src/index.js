@@ -6,13 +6,12 @@
  * @flow strict-local
  */
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useState} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
 import DetailsScreen from './screens/DetailsScreen';
-import CartModal from './components/CartModal';
 import {CartContextProvider} from './contexts/CartContext';
 import colors from './assets/colors';
 const Stack = createStackNavigator();
@@ -24,18 +23,11 @@ const App = () => {
       backgroundColor: colors.primary,
     },
     headerTintColor: '#fff',
-    /* headerRight: props => (
-      <CartModal
-        {...props}
-        onPress={() => {
-          // Do something
-        }}
-      />
-    ), */
   };
+  const [items, setItems] = useState({});
   return (
     <NavigationContainer>
-      <CartContextProvider items={{}}>
+      <CartContextProvider items={items} setItems={setItems}>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen
             name={'Home'}
