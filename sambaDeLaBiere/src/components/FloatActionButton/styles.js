@@ -9,7 +9,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     right: 30,
     bottom: 30,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.accent,
     borderRadius: 30,
   },
 });
