@@ -7,17 +7,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   imageContainer: {
-    flex: 4,
+    flex: 3,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginVertical: 10,
-    justifyContent: 'center',
     alignSelf: 'center',
   },
   imageStyles: {
-    width: 200,
-    height: 200,
+    marginLeft: 60,
+    alignSelf: 'center',
+    width: 150,
+    height: 150,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   informationContainer: {
-    flex: 3,
+    flex: 4,
   },
   informationSubcontainer: {
     justifyContent: 'flex-start',
@@ -25,7 +33,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   nameStyles: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     color: '#333',
   },
@@ -74,15 +82,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonContainer: {
-    flex: 2,
-    backgroundColor: '#fff',
+    height: 65,
+    backgroundColor: '#ff8000',
     justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginVertical: 20,
+    borderRadius: 10,
   },
   buttonStyles: {
-    marginHorizontal: 20,
+    flexDirection: 'row',
     paddingVertical: 20,
-    backgroundColor: '#ff8000',
-    borderRadius: 10,
   },
   textButtonStyles: {
     fontSize: 20,
@@ -90,6 +100,26 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
   },
+  backIconContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginRight: 20,
+  },
+  cartButtonStyles: {marginRight: 20, alignSelf: 'center'},
+  iconCartContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    backgroundColor: '#ff8000',
+  },
+  yeastTextStyles: {alignSelf: 'center', fontWeight: 'bold', color: '#fff'},
+  addCartButtonContainer: {alignSelf: 'center'},
+  iconButtonCart: {marginHorizontal: 10},
 });
 
 export default styles;

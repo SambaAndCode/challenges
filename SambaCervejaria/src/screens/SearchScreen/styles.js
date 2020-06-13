@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
+  headerContainer: {flex: 1},
   body: {
     flex: 3,
     backgroundColor: '#ECECE2',
@@ -16,6 +17,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     color: '#777',
+  },
+  flatListStyles: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

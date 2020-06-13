@@ -5,19 +5,15 @@ import styles from './styles';
 
 const Ingredients = ({ingredients}) => {
   return (
-    <View
-      style={{
-        marginHorizontal: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-      }}>
+    <View style={styles.ingredientsContainer}>
       <View>
         <Text style={styles.textIngredientsDescription}>
           {ingredients.name}
         </Text>
       </View>
-      <View style={{flexDirection: 'row'}}>
-        <Text style={[styles.textIngredientsDescription, {marginRight: 5}]}>
+      <View style={styles.ingredientsDetailsContainer}>
+        <Text
+          style={[styles.textIngredientsDescription, styles.amountTextStyles]}>
           {ingredients.amount.value}
         </Text>
         <Text style={styles.textIngredientsDescription}>

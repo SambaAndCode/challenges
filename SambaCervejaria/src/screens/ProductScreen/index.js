@@ -1,7 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Ioicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
+
+import {useCart} from '../../contexts/cartContext';
+
+import Cart from '../../components/Cart';
 
 import styles from './styles';
 
@@ -9,29 +14,57 @@ import Ingredients from './Ingredients';
 
 const ProductScreen = ({route, navigation}) => {
   const {product} = route?.params;
-  console.log(product.ingredients);
+  const {cart, setCart, visible, setVisible} = useCart();
+
+  const verifyProduct = () => {
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].id === product.id) {
+        return i;
+      }
+    }
+  };
+
+  const addProduct = () => {
+    setCart([
+      ...cart,
+      {
+        name: product.name,
+        id: product.id,
+        amount: 1,
+      },
+    ]);
+  };
+
+  const updateProduct = pos => {
+    setCart(
+      cart.map((item, index) => {
+        if (index === pos) {
+          return {
+            name: product.name,
+            id: product.id,
+            amount: cart[index].amount + 1,
+          };
+        } else {
+          return item;
+        }
+      }),
+    );
+  };
+
+  const addToCart = () => {
+    let pos = verifyProduct();
+    pos >= 0 ? updateProduct(pos) : addProduct();
+  };
+
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
+      <View style={styles.headerContainer}>
         <View style={styles.informationSubcontainer}>
           <Text style={styles.nameStyles}>{product.name}</Text>
           <Text style={styles.taglineStyles}>{product.tagline}</Text>
         </View>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: 30,
-            height: 30,
-            borderRadius: 15,
-            marginRight: 20,
-          }}>
-          <Icon
+        <View style={styles.backIconContainer}>
+          <Ioicons
             name="ios-arrow-back"
             size={30}
             onPress={() => {
@@ -42,11 +75,22 @@ const ProductScreen = ({route, navigation}) => {
         </View>
       </View>
       <View style={styles.imageContainer}>
-        <Image
-          source={{uri: `${product.image_url}`}}
-          style={styles.imageStyles}
-          resizeMode="contain"
-        />
+        <View style={{flex: 1}}>
+          <Image
+            source={{uri: `${product.image_url}`}}
+            style={styles.imageStyles}
+            resizeMode="contain"
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            visible ? setVisible(false) : setVisible(true);
+          }}
+          style={styles.cartButtonStyles}>
+          <View style={styles.iconCartContainer}>
+            <Feather name="shopping-cart" size={20} color="#fff" />
+          </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.informationContainer}>
         <View style={styles.descriptionContainer}>
@@ -68,7 +112,7 @@ const ProductScreen = ({route, navigation}) => {
             <Text
               style={[
                 styles.textIngredientsDescription,
-                {alignSelf: 'center', fontWeight: 'bold', color: '#fff'},
+                styles.yeastTextStyles,
               ]}>
               {product.ingredients.yeast}
             </Text>
@@ -76,10 +120,16 @@ const ProductScreen = ({route, navigation}) => {
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.buttonStyles}>
-          <Text style={styles.textButtonStyles}>Add to SambaCart</Text>
+        <TouchableOpacity onPress={addToCart} style={styles.buttonStyles}>
+          <View style={styles.addCartButtonContainer}>
+            <Text style={styles.textButtonStyles}>Add to SambaCart</Text>
+          </View>
+          <View style={styles.iconButtonCart}>
+            <Feather name="shopping-cart" size={30} color="#fff" />
+          </View>
         </TouchableOpacity>
       </View>
+      <Cart />
     </View>
   );
 };

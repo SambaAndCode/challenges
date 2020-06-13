@@ -4,6 +4,7 @@ import {Text, View, FlatList, StatusBar} from 'react-native';
 
 import api from '../../services/api';
 
+import Cart from '../../components/Cart';
 import Header from './Header';
 import ProductItem from './ProductItem';
 
@@ -57,7 +58,7 @@ const SearchScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#ff8000" />
-      <View style={{flex: 1}}>
+      <View style={styles.headerContainer}>
         <Header setProductName={setProductName} />
       </View>
       <View style={styles.body}>
@@ -69,16 +70,14 @@ const SearchScreen = ({navigation}) => {
             onEndReached={loadProducts}
             onEndReachedThreshold={0.2}
             keyExtractor={product => String(product.id)}
-            contentContainerStyle={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+            contentContainerStyle={styles.flatListStyles}
             renderItem={({item: product}) => (
               <ProductItem product={product} navigation={navigation} />
             )}
           />
         )}
       </View>
+      <Cart />
     </View>
   );
 };
