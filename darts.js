@@ -10,12 +10,3 @@ function dart(x, y) {
   }
   return 0;
 }
-
-console.log(dart(3, 2));
-console.log(dart(1, 2));
-console.log(dart(13, 0));
-console.log(dart(7, 2));
-console.log(dart(2, 10));
-console.log(dart(4, 2));
-console.log(dart(0, 0));
-console.log(dart(9, 4));
