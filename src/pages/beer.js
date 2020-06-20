@@ -1,25 +1,8 @@
 import React from 'react';
 import styles from './styles/styles';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-} from 'react-native';
-// import {WebView} from 'react-native-webview';
-
-function renderItem({item}) {
-  return (
-    <View>
-      <Text>{`${item.name} (${item.amount.value} ${item.amount.unit})`}</Text>
-    </View>
-  );
-}
+import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
 
 const Beer = ({navigation}) => (
-  // <WebView source={{uri: navigation.state.params.beer.image_url}} />
   <View style={styles.beerContainer}>
     <ScrollView>
       <Image
@@ -39,11 +22,7 @@ const Beer = ({navigation}) => (
       ].map((item) => (
         <Text>{`${item.name} (${item.amount.value} ${item.amount.unit})`}</Text>
       ))}
-      <TouchableOpacity
-        style={styles.beerButton}
-        onPress={() => {
-          // this.props.navigation.navigate('Beer', {beer: item});
-        }}>
+      <TouchableOpacity style={styles.beerButton} onPress={() => {}}>
         <Text style={styles.beerButtonTxt}>Adicionar ao carrinho</Text>
       </TouchableOpacity>
     </ScrollView>
