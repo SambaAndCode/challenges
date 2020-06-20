@@ -60,4 +60,13 @@ export default StyleSheet.create({
     color: '#da552f',
     fontWeight: 'bold',
   },
+
+  beerInput: {
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    padding: 15,
+    marginTop: 10,
+    fontSize: 16,
+  },
 });

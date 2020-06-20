@@ -4,9 +4,10 @@ import styles from './styles/styles';
 import {
   Alert,
   View,
+  TextInput,
   Text,
-  Image,
   FlatList,
+  Image,
   TouchableOpacity,
 } from 'react-native';
 
@@ -20,20 +21,28 @@ export default class Main extends Component {
   };
 
   state = {
+    name: '',
     page: 1,
     beers: [],
     isFetching: false,
+    cart: [],
   };
 
   componentDidMount() {
-    this.loadProducts();
+    // this.loadBeers();
   }
 
-  loadProducts = async (page = 1, per_page = 5) => {
+  loadBeers = async (page = 1, per_page = 5) => {
     try {
-      const {data} = await api.get(`beers?page=${page}&per_page=${per_page}`);
+      const {data} =
+        this.state.name === ''
+          ? await api.get(`beers?page=${page}&per_page=${per_page}`)
+          : await api.get(`beers?beer_name=${this.state.name}`);
       let beers = data;
-      if (page !== 1) {
+      if (beers.length === 0) {
+        Alert.alert('Beer', 'Not found!');
+      }
+      if (this.state.name === '' && page !== 1) {
         beers = [...this.state.beers, ...data];
       }
       this.setState({
@@ -49,7 +58,7 @@ export default class Main extends Component {
   loadMore = () => {
     const {page} = this.state;
     const nextPage = page + 1;
-    this.loadProducts(nextPage);
+    this.loadBeers(nextPage);
   };
 
   renderItem = ({item}) => (
@@ -68,14 +77,24 @@ export default class Main extends Component {
   );
 
   onRefresh = () => {
+    // const {name} = this.state;
     this.setState({isFetching: true}, () => {
-      this.loadProducts();
+      this.loadBeers();
     });
   };
 
   render() {
     return (
       <View style={styles.container}>
+        <TextInput
+          style={styles.beerInput}
+          autoCorrect={false}
+          placeholder="Type here the name of beer!"
+          value={this.state.name}
+          onChangeText={(name) => this.setState({name})}
+          onSubmitEditing={() => this.loadBeers()}
+          // value={this.state.name}
+        />
         <FlatList
           contentContainerStyle={styles.list}
           data={this.state.beers}
