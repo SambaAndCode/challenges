@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import api from '../services/api';
-// import axios from 'axios';
-
+import styles from './styles/styles';
 import {
   Alert,
   View,
@@ -9,7 +8,6 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
-  StyleSheet,
 } from 'react-native';
 
 export default class Main extends Component {
@@ -33,11 +31,14 @@ export default class Main extends Component {
 
   loadProducts = async (page = 1, per_page = 5) => {
     try {
-      const beers = await api.get(`beers?page=${page}&per_page=${per_page}`);
-
+      const {data} = await api.get(`beers?page=${page}&per_page=${per_page}`);
+      let beers = data;
+      if (page !== 1) {
+        beers = [...this.state.beers, ...data];
+      }
       this.setState({
         page,
-        beers: [...this.state.beers, ...beers.data],
+        beers,
         isFetching: false,
       });
     } catch (e) {
@@ -89,57 +90,3 @@ export default class Main extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fafafa',
-  },
-  list: {
-    padding: 20,
-  },
-  beerContainer: {
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 5,
-    padding: 20,
-    marginBottom: 20,
-  },
-
-  beerName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-
-  beerImage: {
-    width: '100%',
-    height: 400,
-    marginVertical: 15,
-  },
-
-  beerTagline: {
-    fontSize: 16,
-    color: '#999',
-    marginTop: 5,
-    lineHeight: 24,
-  },
-
-  beerButton: {
-    height: 42,
-    borderRadius: 5,
-    borderWidth: 2,
-    borderColor: '#da552f',
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 10,
-  },
-
-  beerButtonTxt: {
-    fontSize: 16,
-    color: '#da552f',
-    fontWeight: 'bold',
-  },
-});
