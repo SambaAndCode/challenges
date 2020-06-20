@@ -36,6 +36,14 @@ export default StyleSheet.create({
     lineHeight: 24,
   },
 
+  beerTaglineIn: {
+    fontSize: 16,
+    color: '#333',
+    fontWeight: 'bold',
+    marginTop: 5,
+    lineHeight: 24,
+  },
+
   beerButton: {
     height: 42,
     borderRadius: 5,
