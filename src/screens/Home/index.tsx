@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { NativeTouchEvent } from 'react-native';
 import Navbar from '../../components/Navbar';
 import SearchBar from '../../components/SearchBar';
 import BeerCard from '../../components/BeerCard';
@@ -16,7 +15,7 @@ interface IBeer {
   image_url: string;
 }
 
-export default function Home() {
+const Home: React.FC = () => {
   const [beers, setBeers] = useState<IBeer[]>([]);
   const [search, setSearch] = useState('');
   const [noBeers, setNoBeers] = useState(false);
@@ -61,6 +60,7 @@ export default function Home() {
       {beers.map(beer => (
         <BeerCard
           key={beer.id}
+          id={beer.id}
           name={beer.name}
           tagline={beer.tagline}
           image={beer.image_url}
@@ -68,4 +68,6 @@ export default function Home() {
       ))}
     </Container>
   );
-}
+};
+
+export default Home;

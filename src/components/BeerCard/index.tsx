@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { Image } from 'react-native';
 
 import {
@@ -12,12 +13,15 @@ import {
 } from './styles';
 
 interface IProps {
+  id?: number;
   name?: string;
   tagline?: string;
   image?: string;
 }
 
-const BeerCard: React.FC<IProps> = ({ name, tagline, image }) => {
+const BeerCard: React.FC<IProps> = ({ name, tagline, image, id }) => {
+  const { navigate } = useNavigation();
+
   return (
     <Container>
       <ImageBox>
@@ -33,7 +37,7 @@ const BeerCard: React.FC<IProps> = ({ name, tagline, image }) => {
       <Title>{name}</Title>
       <SubTitle>{tagline}</SubTitle>
       <ButtonContainer>
-        <Button>
+        <Button onPress={() => navigate('Beer', { id })}>
           <ButtonText>See More</ButtonText>
         </Button>
       </ButtonContainer>

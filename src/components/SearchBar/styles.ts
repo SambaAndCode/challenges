@@ -12,7 +12,7 @@ export const Input = styled.TextInput`
   font-weight: bold;
   font-size: 16px;
   margin-right: 16px;
-  /* font-family: Nunito; */
+  font-family: Nunito_700Bold;
 `;
 
 export const Magnifier = styled.TouchableOpacity`

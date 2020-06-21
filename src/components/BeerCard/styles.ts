@@ -18,7 +18,7 @@ export const ImageBox = styled.View`
 `;
 
 export const Title = styled.Text`
-  /* font-family: Nunito; */
+  font-family: Nunito_700Bold;
   font-style: normal;
   font-weight: bold;
   font-size: 26px;
@@ -28,7 +28,7 @@ export const Title = styled.Text`
 `;
 
 export const SubTitle = styled.Text`
-  /* font-family: Nunito; */
+  font-family: Nunito_700Bold;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -54,7 +54,7 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const ButtonText = styled.Text`
-  /* font-family: Nunito; */
+  font-family: Nunito_700Bold;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;

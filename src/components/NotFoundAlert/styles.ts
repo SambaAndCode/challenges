@@ -12,7 +12,7 @@ export const AlertImage = styled.Image`
 `;
 
 export const AlertMessage = styled.Text`
-  /* font-family: Nunito; */
+  font-family: Nunito_700Bold;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
