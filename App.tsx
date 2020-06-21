@@ -9,6 +9,8 @@ import {
   useFonts,
 } from '@expo-google-fonts/nunito';
 
+import CartProvider from './src/contexts/CartContext';
+
 import Home from './src/screens/Home';
 import Beer from './src/screens/Beer';
 import Cart from './src/screens/Cart';
@@ -26,17 +28,19 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <StatusBar hidden />
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Beer" component={Beer} />
-        <Stack.Screen name="Cart" component={Cart} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <CartProvider>
+      <NavigationContainer>
+        <StatusBar hidden />
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Beer" component={Beer} />
+          <Stack.Screen name="Cart" component={Cart} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </CartProvider>
   );
 }

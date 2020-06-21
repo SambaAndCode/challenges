@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
 import { ScrollView, Text, Image } from 'react-native';
 import Navbar from '../../components/Navbar';
+
+import { CartContext } from '../../contexts/CartContext';
 
 import api from '../../services/api';
 
@@ -35,6 +37,7 @@ interface IBeer {
 }
 
 import {
+  Wrapper,
   Container,
   Title,
   SubTitle,
@@ -48,10 +51,11 @@ import {
 } from './styles';
 
 const Beer = () => {
+  const [beer, setBeer] = useState<IBeer>();
+
   const route = useRoute();
   const navigation = useNavigation();
-
-  const [beer, setBeer] = useState<IBeer | null>(null);
+  const { handleAddBeer } = useContext(CartContext);
 
   useEffect(() => {
     const { id } = route.params as IParams;
@@ -63,12 +67,12 @@ const Beer = () => {
       const response = await api.get(`beers/${id}`);
       setBeer(response.data[0]);
     } catch {
-      setBeer(null);
+      navigation.navigate('Home');
     }
   };
 
   return (
-    <ScrollView>
+    <Wrapper>
       <Navbar />
       <CenteredSection>
         <Image
@@ -97,12 +101,19 @@ const Beer = () => {
           {beer?.ingredients.yeast}
         </Ingredient>
         <CenteredSection>
-          <Button onPress={() => navigation.navigate('Cart')}>
-            <ButtonText>Buy</ButtonText>
-          </Button>
+          {beer && (
+            <Button
+              onPress={() => {
+                handleAddBeer(beer);
+                navigation.navigate('Cart');
+              }}
+            >
+              <ButtonText>Buy</ButtonText>
+            </Button>
+          )}
         </CenteredSection>
       </Container>
-    </ScrollView>
+    </Wrapper>
   );
 };
 

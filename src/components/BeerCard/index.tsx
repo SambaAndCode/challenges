@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Image } from 'react-native';
 
