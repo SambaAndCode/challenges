@@ -19,10 +19,18 @@ const Beer = ({navigation}) => (
       {[
         ...navigation.state.params.beer.ingredients.malt,
         ...navigation.state.params.beer.ingredients.hops,
-      ].map((item) => (
-        <Text>{`${item.name} (${item.amount.value} ${item.amount.unit})`}</Text>
+      ].map((item, index) => (
+        <Text
+          key={
+            index
+          }>{`${item.name} (${item.amount.value} ${item.amount.unit})`}</Text>
       ))}
-      <TouchableOpacity style={styles.beerButton} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.beerButton}
+        onPress={(item) => {
+          navigation.setParams({state: {cart: {beer: item, quantity: 1}}});
+          navigation.goBack();
+        }}>
         <Text style={styles.beerButtonTxt}>Adicionar ao carrinho</Text>
       </TouchableOpacity>
     </ScrollView>

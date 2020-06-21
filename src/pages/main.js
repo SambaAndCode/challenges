@@ -11,15 +11,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default class Main extends Component {
-  static navigationOptions = {
-    title: 'Samba de La Biere',
-    headerStyle: {
-      backgroundColor: '#da552f',
-    },
-    headerTintColor: '#fff',
-  };
+import cart from '../assets/cart.png';
 
+export default class Main extends Component {
   state = {
     name: '',
     page: 1,
@@ -27,6 +21,29 @@ export default class Main extends Component {
     isFetching: false,
     cart: [],
   };
+
+  static navigationOptions = ({navigation}) => ({
+    title: 'Samba de La Biere',
+    headerStyle: {
+      backgroundColor: '#da552f',
+    },
+    headerTintColor: '#fff',
+    headerRight: (
+      <TouchableOpacity
+        style={{marginRight: 20}}
+        onPress={() =>
+          navigation.navigate('Cart', {
+            cart: [
+              {beer: {name: 'Heineken', alguma: 'COISA'}, quantity: 2},
+              {beer: {name: 'Corona', alguma: 'COISA'}, quantity: 4},
+              {beer: {name: 'Eisenbahn', alguma: 'COISA'}, quantity: 1},
+            ],
+          })
+        }>
+        <Image source={cart} />
+      </TouchableOpacity>
+    ),
+  });
 
   componentDidMount() {
     // this.loadBeers();
@@ -69,7 +86,10 @@ export default class Main extends Component {
       <TouchableOpacity
         style={styles.beerButton}
         onPress={() => {
-          this.props.navigation.navigate('Beer', {beer: item});
+          this.props.navigation.navigate('Beer', {
+            beer: item,
+            state: this.state,
+          });
         }}>
         <Text style={styles.beerButtonTxt}>Saiba mais</Text>
       </TouchableOpacity>
@@ -77,7 +97,6 @@ export default class Main extends Component {
   );
 
   onRefresh = () => {
-    // const {name} = this.state;
     this.setState({isFetching: true}, () => {
       this.loadBeers();
     });
@@ -93,7 +112,6 @@ export default class Main extends Component {
           value={this.state.name}
           onChangeText={(name) => this.setState({name})}
           onSubmitEditing={() => this.loadBeers()}
-          // value={this.state.name}
         />
         <FlatList
           contentContainerStyle={styles.list}
