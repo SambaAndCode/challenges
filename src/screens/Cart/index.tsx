@@ -18,11 +18,11 @@ import {
 
 const Cart: React.FC = () => {
   const navigation = useNavigation();
-  const { cart } = useContext(CartContext);
+  const { cart, isOrdered, handlePayment } = useContext(CartContext);
   return (
     <Wrapper>
       <Navbar />
-      <Title>Order review</Title>
+      <Title>Order summary</Title>
       <ButtonContainer>
         <GoBackButton onPress={() => navigation.navigate('Home')}>
           <GoBackButtonText>Continue shopping</GoBackButtonText>
@@ -34,9 +34,18 @@ const Cart: React.FC = () => {
         ))}
       </CartSection>
       <ButtonContainer>
-        <CheckoutButton>
-          <CheckoutButtonText>Pay</CheckoutButtonText>
-        </CheckoutButton>
+        {cart.length ? (
+          <CheckoutButton
+            onPress={() => {
+              handlePayment();
+              setTimeout(() => navigation.navigate('PaymentSuccess'), 3000);
+            }}
+          >
+            <CheckoutButtonText>
+              {isOrdered ? 'Placing order...' : 'Pay'}
+            </CheckoutButtonText>
+          </CheckoutButton>
+        ) : null}
       </ButtonContainer>
     </Wrapper>
   );

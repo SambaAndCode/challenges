@@ -12,14 +12,17 @@ type IBeer = Omit<IBeerOnCart, 'quantity'>;
 
 interface ICartContext {
   cart: IBeerOnCart[];
+  isOrdered: boolean;
   handleAddBeer: (beer: IBeer) => void;
   handleDeleteBeer: (id: number) => void;
+  handlePayment: () => void;
 }
 
 export const CartContext = createContext<ICartContext>({} as ICartContext);
 
 const CartProvider: React.FC = ({ children }) => {
   const [cart, setCart] = useState<IBeerOnCart[]>([]);
+  const [isOrdered, setIsOrdered] = useState(false);
 
   const handleAddBeer = (beer: IBeer) => {
     const { id } = beer;
@@ -70,8 +73,24 @@ const CartProvider: React.FC = ({ children }) => {
     setCart(prevCart => prevCart.filter(beer => beer.id !== id));
   };
 
+  const handlePayment = () => {
+    setIsOrdered(true);
+    setTimeout(() => {
+      setCart([]);
+      setIsOrdered(false);
+    }, 3000);
+  };
+
   return (
-    <CartContext.Provider value={{ cart, handleAddBeer, handleDeleteBeer }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        isOrdered,
+        handleAddBeer,
+        handleDeleteBeer,
+        handlePayment,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

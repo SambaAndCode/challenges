@@ -6,9 +6,7 @@ const NotFoundAlert = () => {
   return (
     <Container>
       <AlertImage source={require('../../../assets/alert.png')} />
-      <AlertMessage>
-        Sua busca não retornou resultados.{'\n'}Tente novamente.
-      </AlertMessage>
+      <AlertMessage>No results. Try again.</AlertMessage>
     </Container>
   );
 };

@@ -21,8 +21,10 @@ const Home: React.FC = () => {
   const [noBeers, setNoBeers] = useState(false);
 
   useEffect(() => {
-    getBeers('beers');
-  }, []);
+    if (!search) {
+      getBeers('beers');
+    }
+  }, [search]);
 
   const getBeers = async (endpoint: string) => {
     try {
