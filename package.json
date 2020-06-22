@@ -1,0 +1,14 @@
+{
+  "name": "challenges",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:rickyalmeidadev/challenges.git",
+  "author": "Ricky Almeida <ricky.almeida.dev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "clear && jest --watchAll"
+  },
+  "dependencies": {
+    "jest": "^26.0.1"
+  }
+}
