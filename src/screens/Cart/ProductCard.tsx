@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { IProduct } from "../../types";
+import { moderateScale } from "react-native-size-matters";
+import { MyTheme } from "../../constants";
 
 export const ProductCard = ({ product }: { product: IProduct }) => {
   const { beer, quantity } = product;
@@ -24,33 +26,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#fff",
-    padding: 10,
-    borderColor: "#ccc",
+    backgroundColor: MyTheme.colors.backgroundSecondary,
+    padding: moderateScale(10),
+    borderColor: MyTheme.colors.border,
     borderBottomWidth: 1,
   },
   productContent: {
-    // alignItems: "center",
-    // justifyContent: "center",
     width: "100%",
   },
   imageContainer: {
     width: "100%",
-    height: 100,
+    height: moderateScale(100),
     alignItems: "center",
     justifyContent: "center",
   },
   productImage: {
-    width: 80,
-    height: 310,
+    width: moderateScale(80),
+    height: moderateScale(310),
     resizeMode: "stretch",
     transform: [{ rotate: "90deg" }],
   },
   productTitleText: {
-    color: "#424242",
-    fontSize: 22,
+    color: MyTheme.colors.text.default,
+    fontSize: moderateScale(22),
     fontWeight: "bold",
-    marginVertical: 10,
+    marginVertical: moderateScale(10),
   },
   productQuantityRow: {
     flexDirection: "row",
@@ -58,16 +58,16 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   productQuantityText: {
-    color: "#424242",
-    fontSize: 20,
+    color: MyTheme.colors.text.default,
+    fontSize: moderateScale(20),
     fontWeight: "bold",
   },
   productQuantityNumber: {
     color: "white",
-    fontSize: 20,
+    fontSize: moderateScale(20),
     fontWeight: "bold",
     backgroundColor: "red",
-    borderRadius: 10,
-    paddingHorizontal: 10,
+    borderRadius: moderateScale(10),
+    paddingHorizontal: moderateScale(10),
   },
 });

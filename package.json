@@ -22,6 +22,8 @@
     "react-native-reanimated": "^1.9.0",
     "react-native-safe-area-context": "^3.0.5",
     "react-native-screens": "^2.9.0",
+    "react-native-size-matters": "^0.3.0",
+    "react-native-skeleton-placeholder": "^2.0.7",
     "react-native-unimodules": "~0.9.0",
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "~0.11.7"

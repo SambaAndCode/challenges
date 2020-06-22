@@ -1,14 +1,19 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { moderateScale } from "react-native-size-matters";
+import { MyTheme } from "../constants";
 
 export const CartHeaderTag = ({ onPress, quantity }) => {
   return (
     <TouchableHighlight onPress={onPress} style={styles.container}>
       <View style={styles.buttonContainer}>
         <View style={styles.iconContainer}>
-          <Icon name="shopping-cart" size={27} color="#000" />
+          <Icon
+            name="shopping-cart"
+            size={moderateScale(27)}
+            color={MyTheme.colors.secondary}
+          />
         </View>
         <View style={styles.cartQuantity}>
           <Text style={styles.cartQuantityText}>{quantity}</Text>
@@ -27,28 +32,28 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     height: "100%",
-    paddingHorizontal: 20,
+    paddingHorizontal: moderateScale(20),
     borderRadius: 2,
-    backgroundColor: "#ffca28",
+    backgroundColor: MyTheme.colors.primary,
     justifyContent: "center",
     alignItems: "center",
   },
   iconContainer: {
     position: "relative",
-    top: 7,
+    top: moderateScale(7),
   },
   cartQuantity: {
     position: "relative",
     backgroundColor: "red",
-    width: 20,
+    width: moderateScale(20),
     top: 2,
-    left: 20,
+    left: moderateScale(20),
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 7,
+    borderRadius: moderateScale(7),
   },
   cartQuantityText: {
     color: "white",
-    fontSize: 15,
+    fontSize: moderateScale(15),
   },
 });

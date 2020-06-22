@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { IBeer } from "../../types";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { moderateScale } from "react-native-size-matters";
+import { MyTheme } from "../../constants";
 
 export const BeerCard = ({ beer }: { beer: IBeer }) => {
   const navigation = useNavigation();
@@ -29,14 +31,14 @@ export const BeerCard = ({ beer }: { beer: IBeer }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    padding: moderateScale(10),
     flexDirection: "column",
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: moderateScale(10),
     borderStyle: "solid",
-    borderColor: "#ccc",
+    borderColor: MyTheme.colors.border,
     margin: 10,
-    backgroundColor: "#fff",
+    backgroundColor: MyTheme.colors.backgroundSecondary,
   },
   beerContent: {
     alignItems: "center",
@@ -45,13 +47,13 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: "100%",
-    height: 100,
+    height: moderateScale(100),
     alignItems: "center",
     justifyContent: "center",
   },
   beerImage: {
-    width: 80,
-    height: 310,
+    width: moderateScale(80),
+    height: moderateScale(310),
     resizeMode: "stretch",
     transform: [{ rotate: "90deg" }],
   },
@@ -61,23 +63,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   beerTitleText: {
-    color: "#424242",
-    fontSize: 20,
+    color: MyTheme.colors.text.title,
+    fontSize: moderateScale(20),
     fontWeight: "bold",
-    marginVertical: 10,
+    marginVertical: moderateScale(10),
   },
   beerTagLine: {
-    color: "#000",
-    fontSize: 14,
-    backgroundColor: "#ffca28",
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    borderRadius: 15,
+    color: MyTheme.colors.secondary,
+    fontSize: moderateScale(14),
+    backgroundColor: MyTheme.colors.primary,
+    paddingHorizontal: moderateScale(15),
+    paddingVertical: moderateScale(5),
+    borderRadius: moderateScale(15),
   },
   beerBody: {
-    // width: "90%",
     alignItems: "center",
     justifyContent: "center",
-    padding: 5,
+    padding: moderateScale(5),
   },
 });

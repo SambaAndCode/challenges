@@ -1,3 +1,5 @@
+import { DefaultTheme } from "@react-navigation/native";
+
 export const BASE_URL = "https://api.punkapi.com/v2";
 
 export const getParams = (params: object) => {
@@ -13,4 +15,20 @@ export const getParams = (params: object) => {
     return null;
   });
   return `?${url}`;
+};
+
+export const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "#ffecb3",
+    secondary: "#212121",
+    background: "#fff",
+    border: "#ccc",
+    backgroundSecondary: "#ffffe5",
+    text: {
+      title: "#4e4e4e",
+      default: "#424242",
+    },
+  },
 };

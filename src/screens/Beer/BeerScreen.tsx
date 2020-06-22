@@ -10,6 +10,8 @@ import {
 import { store } from "../../store/store";
 import { Types } from "../../store/ducks/cart";
 import { CartHeaderTag } from "../../components/CartHeaderTag";
+import { moderateScale } from "react-native-size-matters";
+import { MyTheme } from "../../constants";
 
 export const BeerScreen = ({ route, navigation }) => {
   const { beer } = route.params;
@@ -90,17 +92,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    paddingHorizontal: 10,
-    paddingTop: 10,
-    backgroundColor: "#fff",
+    paddingHorizontal: moderateScale(10),
+    paddingTop: moderateScale(10),
+    backgroundColor: MyTheme.colors.backgroundSecondary,
     justifyContent: "space-between",
-    // minHeight: Dimensions.get("window").height,
   },
   beerContent: {
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    paddingVertical: 10,
+    paddingVertical: moderateScale(10),
   },
   imageContainer: {
     width: "100%",
@@ -108,19 +109,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   beerImage: {
-    width: 90,
-    height: 300,
+    width: moderateScale(90),
+    height: moderateScale(300),
     resizeMode: "stretch",
   },
   beerHeader: {
     width: "100%",
-    padding: 10,
+    padding: moderateScale(10),
     justifyContent: "center",
     alignItems: "center",
   },
   beerTitle: {
-    color: "#4e4e4e",
-    fontSize: 22,
+    color: MyTheme.colors.text.title,
+    fontSize: moderateScale(22),
     fontWeight: "bold",
     textAlign: "justify",
   },
@@ -131,21 +132,21 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   tagline: {
-    color: "#000",
-    fontSize: 14,
-    backgroundColor: "#ffca28",
-    paddingHorizontal: 15,
-    paddingVertical: 5,
-    borderRadius: 15,
+    color: MyTheme.colors.secondary,
+    fontSize: moderateScale(14),
+    backgroundColor: MyTheme.colors.primary,
+    paddingHorizontal: moderateScale(15),
+    paddingVertical: moderateScale(5),
+    borderRadius: moderateScale(15),
   },
   beerDetailText: {
-    color: "#424242",
-    fontSize: 12,
+    color: MyTheme.colors.text.default,
+    fontSize: moderateScale(12),
     textAlign: "justify",
   },
   beerIngredientsText: {
-    color: "#424242",
-    fontSize: 12,
+    color: MyTheme.colors.text.default,
+    fontSize: moderateScale(12),
     textAlign: "justify",
     fontWeight: "bold",
   },
@@ -158,21 +159,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 10,
+    paddingHorizontal: moderateScale(10),
   },
   addToCartButton: {
-    height: 70,
+    height: moderateScale(70),
     fontWeight: "bold",
-    backgroundColor: "#ffca28",
+    backgroundColor: MyTheme.colors.primary,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#fbc02d",
+    borderColor: MyTheme.colors.secondary,
   },
   buttonText: {
-    fontSize: 18,
-    color: "#000",
+    fontSize: moderateScale(18),
+    color: MyTheme.colors.secondary,
     fontWeight: "bold",
   },
 });

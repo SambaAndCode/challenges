@@ -7,10 +7,11 @@ const Types = {
   FETCH_BEERS_REQUEST: "FETCH_BEERS_REQUEST",
   FETCH_BEERS_SUCCESS: "FETCH_BEERS_SUCCESS",
   FETCH_BEERS_FAILURE: "FETCH_BEERS_FAILURE",
+  FETCH_MORE_BEERS_SUCCESS: "FETCH_MORE_BEERS_SUCCESS",
 };
 
 export interface IState {
-  isLoading: false;
+  isLoading: boolean;
   beers: [IBeer];
   error: "";
 }
@@ -26,19 +27,30 @@ export default (state: IState, action: any): IState => {
     case Types.FETCH_BEERS_REQUEST: {
       return {
         ...state,
-        beers: action.beers,
+        isLoading: true,
       };
     }
     case Types.FETCH_BEERS_SUCCESS: {
       return {
         ...state,
+        isLoading: false,
+        error: "",
         beers: action.payload.beers,
       };
     }
     case Types.FETCH_BEERS_FAILURE: {
       return {
         ...state,
-        beers: action.beers,
+        isLoading: false,
+        error: action.payload.error,
+      };
+    }
+    case Types.FETCH_MORE_BEERS_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        error: "",
+        beers: state.beers.concat(action.payload.beers),
       };
     }
     default:
@@ -56,6 +68,25 @@ export const Creators = {
       .then((resp) => {
         dispatch({
           type: Types.FETCH_BEERS_SUCCESS,
+          payload: { beers: resp.data },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: Types.FETCH_BEERS_FAILURE,
+          payload: { error },
+        });
+      });
+  },
+  fetchMoreBeers: (params: any, dispatch: Dispatch) => {
+    dispatch({
+      type: Types.FETCH_BEERS_REQUEST,
+    });
+    axios
+      .get(`${BASE_URL}/beers${getParams(params)}`)
+      .then((resp) => {
+        dispatch({
+          type: Types.FETCH_MORE_BEERS_SUCCESS,
           payload: { beers: resp.data },
         });
       })

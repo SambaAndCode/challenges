@@ -4,9 +4,9 @@ import {
   StyleSheet,
   View,
   FlatList,
-  TextInput,
   Text,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { BeerCard } from "./BeerCard";
@@ -14,6 +14,8 @@ import { store } from "../../store/store";
 import { Creators as beerActions } from "../../store/ducks/beer";
 import { SearchField } from "../../components/SearchField";
 import { CartHeaderTag } from "../../components/CartHeaderTag";
+import { moderateScale } from "react-native-size-matters";
+import { MyTheme } from "../../constants";
 
 export default function SearchScreen({
   navigation,
@@ -21,6 +23,7 @@ export default function SearchScreen({
   navigation: StackNavigationProp<any>;
 }) {
   const [searchName, setSearchName] = useState("");
+  const [page, setSetPage] = useState(0);
   const { state, dispatch } = useContext(store);
   const { beer, cart } = state;
   navigation.setOptions({
@@ -31,31 +34,55 @@ export default function SearchScreen({
       />
     ),
   });
-  const search = () =>
-    beerActions.fetchBeers({ beer_name: searchName, page: 1 }, dispatch);
+  const search = (page = 1) => {
+    setSetPage(page);
+    beerActions.fetchBeers({ beer_name: searchName, page }, dispatch);
+  };
+  const searchMore = () => {
+    const newPage = page + 1;
+    setSetPage(newPage);
+    beerActions.fetchMoreBeers(
+      { beer_name: searchName, page: newPage },
+      dispatch
+    );
+  };
   useEffect(() => {
     search();
   }, []);
 
+  if (!beer || beer.isLoading) {
+    return (
+      <View style={styles.loadingView}>
+        <ActivityIndicator color={MyTheme.colors.primary} size="large" />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <SearchField
-        value={searchName}
-        onChangeText={setSearchName}
-        onSubmit={search}
+      <FlatList
+        data={beer.beers}
+        renderItem={({ item }) => <BeerCard beer={item} />}
+        keyExtractor={(item) => item.id + ""}
+        refreshing={beer.isLoading}
+        ListHeaderComponent={
+          <SearchField
+            value={searchName}
+            onChangeText={setSearchName}
+            onSubmit={search}
+          />
+        }
+        onRefresh={() => (
+          <ActivityIndicator color={MyTheme.colors.primary} size="large" />
+        )}
+        ListEmptyComponent={
+          <View style={styles.notFound}>
+            <Icon name="frown-o" size={moderateScale(25)} color="#c62828" />
+            <Text style={styles.textTitle}>No drink found</Text>
+          </View>
+        }
+        onEndReached={() => searchMore()}
       />
-      {beer && beer.beers && beer.beers.length > 0 ? (
-        <FlatList
-          data={beer.beers}
-          renderItem={({ item }) => <BeerCard beer={item} />}
-          keyExtractor={(item) => item.id + ""}
-        />
-      ) : (
-        <View style={styles.notFound}>
-          <Icon name="frown-o" size={25} color="#c62828" />
-          <Text style={styles.textTitle}>No drink found</Text>
-        </View>
-      )}
     </View>
   );
 }
@@ -64,22 +91,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: Dimensions.get("window").width,
-    backgroundColor: "#e2e2e2",
     height: "100%",
+    backgroundColor: MyTheme.colors.background,
   },
   notFound: {
     flexDirection: "row",
     backgroundColor: "#ef9a9a",
     justifyContent: "center",
     alignItems: "center",
-    height: 50,
-    margin: 20,
-    borderRadius: 10,
-    padding: 10,
+    height: moderateScale(50),
+    margin: moderateScale(20),
+    borderRadius: moderateScale(10),
+    padding: moderateScale(10),
   },
   textTitle: {
-    color: "#c62828",
-    padding: 10,
-    fontSize: 20,
+    color: MyTheme.colors.text.title,
+    padding: moderateScale(10),
+    fontSize: moderateScale(20),
+  },
+  loadingView: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    flex: 1,
   },
 });
