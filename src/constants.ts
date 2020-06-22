@@ -23,9 +23,9 @@ export const MyTheme = {
     ...DefaultTheme.colors,
     primary: "#ffecb3",
     secondary: "#212121",
-    background: "#fff",
+    background: "#ffffe5",
     border: "#ccc",
-    backgroundSecondary: "#ffffe5",
+    backgroundSecondary: "#fff",
     text: {
       title: "#4e4e4e",
       default: "#424242",

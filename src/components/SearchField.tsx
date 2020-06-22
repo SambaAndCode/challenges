@@ -10,7 +10,7 @@ export const SearchField = ({ value, onChangeText, onSubmit }) => {
       <Icon
         name="search"
         size={moderateScale(15)}
-        color={MyTheme.colors.secondary}
+        color={MyTheme.colors.border}
       />
       <TextInput
         style={styles.textField}
