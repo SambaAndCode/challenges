@@ -76,9 +76,14 @@ interface IBeer {
   contributed_by: string;
 }
 
+export interface IProduct {
+  beer: IBeer;
+  quantity: number;
+}
+
 interface IAction {
   type: string;
   payload: any;
 }
 
-export { IBeer, IAction };
+export { IBeer, IProduct, IAction };

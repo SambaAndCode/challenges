@@ -9,51 +9,28 @@ import {
   Dimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { BeerCard } from "./BeerCard";
+import { ProductCard } from "./ProductCard";
 import { store } from "../../store/store";
 import { Creators as beerActions } from "../../store/ducks/beer";
 import { SearchField } from "../../components/SearchField";
 import { CartHeaderTag } from "../../components/CartHeaderTag";
 
-export default function SearchScreen({
-  navigation,
-}: {
-  navigation: StackNavigationProp<any>;
-}) {
-  const [searchName, setSearchName] = useState("");
-  const { state, dispatch } = useContext(store);
-  const { beer, cart } = state;
-  navigation.setOptions({
-    headerRight: () => (
-      <CartHeaderTag
-        onPress={() => navigation.push("Cart")}
-        quantity={cart.totalQuantity}
-      />
-    ),
-  });
-  const search = () =>
-    beerActions.fetchBeers({ beer_name: searchName, page: 1 }, dispatch);
-  useEffect(() => {
-    search();
-  }, []);
+export default function CartScreen({}) {
+  const { state } = useContext(store);
+  const { cart } = state;
 
   return (
     <View style={styles.container}>
-      <SearchField
-        value={searchName}
-        onChangeText={setSearchName}
-        onSubmit={search}
-      />
-      {beer && beer.beers && beer.beers.length > 0 ? (
+      {cart && cart.products && cart.products.length > 0 ? (
         <FlatList
-          data={beer.beers}
-          renderItem={({ item }) => <BeerCard beer={item} />}
-          keyExtractor={(item) => item.id + ""}
+          data={cart.products}
+          renderItem={({ item }) => <ProductCard product={item} />}
+          keyExtractor={(item) => item.beer.id + ""}
         />
       ) : (
         <View style={styles.notFound}>
           <Icon name="frown-o" size={25} color="#c62828" />
-          <Text style={styles.textTitle}>No drink found</Text>
+          <Text style={styles.textTitle}>No drinks in the cart</Text>
         </View>
       )}
     </View>

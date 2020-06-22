@@ -21,32 +21,31 @@ export const INITIAL_STATE: IState = {
   error: "",
 };
 
-export default (() => {
-  return (state: IState, action: any): IState => {
-    switch (action.type) {
-      case Types.FETCH_BEERS_REQUEST: {
-        return {
-          ...state,
-          beers: action.beers,
-        };
-      }
-      case Types.FETCH_BEERS_SUCCESS: {
-        return {
-          ...state,
-          beers: action.payload.beers,
-        };
-      }
-      case Types.FETCH_BEERS_FAILURE: {
-        return {
-          ...state,
-          beers: action.beers,
-        };
-      }
-      default:
-        throw new Error();
+export default (state: IState, action: any): IState => {
+  switch (action.type) {
+    case Types.FETCH_BEERS_REQUEST: {
+      return {
+        ...state,
+        beers: action.beers,
+      };
     }
-  };
-})();
+    case Types.FETCH_BEERS_SUCCESS: {
+      return {
+        ...state,
+        beers: action.payload.beers,
+      };
+    }
+    case Types.FETCH_BEERS_FAILURE: {
+      return {
+        ...state,
+        beers: action.beers,
+      };
+    }
+    default:
+      return { ...state };
+  }
+};
+
 export const Creators = {
   fetchBeers: (params: any, dispatch: Dispatch) => {
     dispatch({

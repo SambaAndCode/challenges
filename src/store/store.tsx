@@ -1,25 +1,15 @@
 import React, { createContext, useReducer, ElementType, Dispatch } from "react";
 import combineReducers from "react-combine-reducers";
-import beerReducer, {
-  IState as IBeerState,
+import createBeerReducer, {
   INITIAL_STATE as INITIAL_STATE_BEER,
 } from "./ducks/beer";
+import createCartReducer, {
+  INITIAL_STATE as INITIAL_STATE_CART,
+} from "./ducks/cart";
 
-// interface IState {
-//   beer: IBeerState;
-// }
-
-// const initialState: IState = {
-//   beer: INITIAL_STATE_BEER,
-// };
-
-// interface IContext {
-//   state: IState;
-//   dispatch: any;
-// }
-console.log(beerReducer);
 const [rootReducerCombined, initialStateCombined] = combineReducers({
-  beer: [beerReducer, INITIAL_STATE_BEER],
+  beer: [createBeerReducer, INITIAL_STATE_BEER],
+  cart: [createCartReducer, INITIAL_STATE_CART],
 });
 
 const initialContext = {

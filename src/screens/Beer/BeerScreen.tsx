@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   StyleSheet,
   Text,
   View,
   Image,
   ScrollView,
-  Button,
-  Dimensions,
+  TouchableHighlight,
 } from "react-native";
-import { IBeer } from "../../types";
+import { store } from "../../store/store";
+import { Types } from "../../store/ducks/cart";
+import { CartHeaderTag } from "../../components/CartHeaderTag";
 
 export const BeerScreen = ({ route, navigation }) => {
   const { beer } = route.params;
+  const { state, dispatch } = useContext(store);
+  const { cart } = state;
   navigation.setOptions({
     title: beer.name,
+    headerRight: () => (
+      <CartHeaderTag
+        onPress={() => navigation.push("Cart")}
+        quantity={cart.totalQuantity}
+      />
+    ),
   });
-
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -65,9 +73,15 @@ export const BeerScreen = ({ route, navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <View style={styles.addToCartButton}>
-        <Text style={styles.buttonText}>ADD TO CART</Text>
-      </View>
+      <TouchableHighlight
+        onPress={() => {
+          dispatch({ type: Types.ADD_TO_CART, payload: { beer } });
+        }}
+      >
+        <View style={styles.addToCartButton}>
+          <Text style={styles.buttonText}>ADD TO CART</Text>
+        </View>
+      </TouchableHighlight>
     </View>
   );
 };
@@ -77,6 +91,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     paddingHorizontal: 10,
+    paddingTop: 10,
     backgroundColor: "#fff",
     justifyContent: "space-between",
     // minHeight: Dimensions.get("window").height,

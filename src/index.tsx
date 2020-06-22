@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SearchScreen from "./screens/Search/SearchScreen";
 import { StateProvider } from "./store/store";
 import { BeerScreen } from "./screens/Beer/BeerScreen";
+import CartScreen from "./screens/Cart/CartScreen";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ export default function App() {
             }}
           />
           <Stack.Screen name="Beer" component={BeerScreen} />
+          <Stack.Screen name="Cart" component={CartScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </StateProvider>
